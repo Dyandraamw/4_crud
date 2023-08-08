@@ -10,7 +10,7 @@ module.exports = {
       {
         source: '/',
         destination: '/products',
-        permanent: true,
+        permanent: false,
       },
     ]
   },
