@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  
+
 }
 
 module.exports = {
@@ -10,7 +10,7 @@ module.exports = {
       {
         source: '/',
         destination: '/products',
-        permanent: true,
+        permanent: false,
       },
     ]
   },
