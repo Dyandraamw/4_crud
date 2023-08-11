@@ -16,7 +16,7 @@ export default function Edit() {
     useEffect(() => {
         const fetchDataProduct = async () => {
             try {
-                const resp = await axios.get(`https://dummyjson.com/products/${Id}`);
+                const resp = await axios.get(`https://dummyjson.com/products/${id}`);
                 setTitle(resp.data.title);
                 setPrice(resp.data.price);
 
