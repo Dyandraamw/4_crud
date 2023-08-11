@@ -12,11 +12,13 @@ export default function Edit() {
     const[price, setPrice] = useState('');
     const [error, setError] = useState('');
     const[updated, setUpdated] = useState(false);
+    const [updatedTitle, setUpdatedTitle] = useState(false);
+    const [updatedPrice, setUpdatedPrice] = useState(false);
     
     useEffect(() => {
         const fetchDataProduct = async () => {
             try {
-                const resp = await axios.get(`https://dummyjson.com/products/${Id}`);
+                const resp = await axios.get(`https://dummyjson.com/products/${id}`);
                 setTitle(resp.data.title);
                 setPrice(resp.data.price);
 
@@ -31,12 +33,12 @@ export default function Edit() {
         e.preventDefault();
         
         if( !title || !price) {
-            setError('Please fill the data first!!');
-            return;
-        }
-
+          setError('Please fill the data first!!');
+          return;
+      }
+          
         setError('');
-
+        
         try {
             const updatedProduct = {
                 title,
@@ -45,6 +47,8 @@ export default function Edit() {
 
             await axios.put(`https://dummyjson.com/products/${id}`, updatedProduct);
         
+        setUpdatedTitle(title);
+        setUpdatedPrice(price); 
         setUpdated(true);
         } catch(error) {
             console.log('Error Update Product',error)
@@ -71,6 +75,7 @@ export default function Edit() {
              />
           </label>
 
+          
             {/* Price */}
           <label className="block mb-2" >
             <span className="block text-lg font-medium text-white mb-2 ">Price</span>
@@ -93,7 +98,9 @@ export default function Edit() {
         {updated && (
           <div className='fixed inset-0 flex items-center justify-center z-50 bg-black opacity-75'>
             <div className='bg-slate-700 p-8 rounded-lg flex flex-col text-white'>
-              <h2 className='text-xl font-medium mb-4 text-white text-center'>Product Successfully Updated!</h2>
+              <h2 className='text-xl font-semibold mb-4 text-white text-center'>Product Successfully Updated!</h2>
+              <p className='mb-2'>Title : {updatedTitle}</p>
+              <p className='mb-4'>Price : {updatedPrice}</p>
               <FcCheckmark className="text-6xl text-emerald-500 animate-pulse mx-auto mb-4"/>
               <button
                 onClick={() => setUpdated(false)} 
